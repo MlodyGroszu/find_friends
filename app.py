@@ -91,10 +91,12 @@ fig.update_layout(
 )
 st.plotly_chart(fig)
 
-fig = px.histogram(same_cluster_df, x="gender")
-fig.update_layout(
-    title="Rozkład płci w grupie",
-    xaxis_title="Płeć",
-    yaxis_title="Liczba osób",
+gender_counts = all_df['gender'].value_counts().reset_index()
+gender_counts.columns = ['gender', 'count']
+
+
+fig = px.pie(gender_counts, names='gender', 
+             values='count', 
+             title='Proporcja Kobiet i Mężczyzn'
 )
 st.plotly_chart(fig)
